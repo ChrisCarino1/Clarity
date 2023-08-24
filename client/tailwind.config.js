@@ -2,10 +2,14 @@ import app from './src/components/'
 
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["index.html", "./src/components/*.jsx", "./src/components/*.js"],
+  important: true,
+  content: ["index.html", "./src/components/*.jsx", "./src/components/*.js", "./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      // fontFamily: {
+      //   'sans' : ['Proxima Nova']
+      // }
+    },
   },
   plugins: [],
 }
-

@@ -6,7 +6,7 @@ const { Configuration, OpenAIApi } = require("openai");
 
 // Set up OpenAI configuration with API key
 const config = new Configuration({
-    apiKey: "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"
+    apiKey: "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"
 })
 
 // Initialize OpenAI API with the provided configuration
@@ -24,17 +24,17 @@ app.use(cors());
 // Define an endpoint for ChatGPT interaction
 app.post("/chat", async (req, res) => {
     // Extract code from the request body
-    const { code } = req.body;
-
+    const { prompt } = req.body;
+    console.log(prompt)
     // Generate completion using OpenAI API
     const completion = await openai.createCompletion({
         model: "text-davinci-003",
-        max_tokens: 512,
+        max_tokens: 2000,
         temperature: 0,
-        prompt: `Given this piece of code write detailed inline comments of what the code does. Additionally, write a summary that captures the code's purpose which is not included as a comment: ${code}`
+        prompt: `On a new line next to the piece of code its referencing write a detailed and meaningful comment on the piece of code. Return the code with these comments inside: ${prompt}`
     });
-
     // Send back the generated text as the response
+    console.log(completion.data.choices[0].text)
     res.send(completion.data.choices[0].text);
 })
 
