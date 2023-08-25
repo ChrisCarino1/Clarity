@@ -6,9 +6,7 @@ export default {
   content: ["index.html", "./src/components/*.jsx", "./src/components/*.js", "./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
-      // fontFamily: {
-      //   'sans' : ['Proxima Nova']
-      // }
+      
     },
   },
   plugins: [],

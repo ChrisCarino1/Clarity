@@ -8,6 +8,7 @@ import { Routes, Route } from 'react-router-dom'
 import Layout from './components/layout/Layout';
 import Chat from './components/Chat';
 import Landing from './components/Landing'
+import Menu from './components/Menu'
 
 function App() {
 

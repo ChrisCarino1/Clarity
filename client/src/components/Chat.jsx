@@ -4,18 +4,14 @@ import CodeMirror from '@uiw/react-codemirror'
 import { javascript } from '@codemirror/lang-javascript';
 import { basicSetup, minimalSetup } from '@uiw/codemirror-extensions-basic-setup';
 import { githubDark, githubDarkInit } from '@uiw/codemirror-theme-github';
-import { BsFillChatLeftFill } from 'react-icons/bs'
-// import { AiOutlineMenu } from 'react-icons/ai'
+import Menu from './Menu'
 
 const Chat = (props) => {
     const [prompt, setPrompt] = useState('')
     const [response, setResponse] = useState('')
     const [loading, setLoading] = useState(false)
+    const [menuActive, setMenuActive] = useState(true)
     const [history, setHistory] = useState([])
-
-    const addToHistory = (res) => {
-        setHistory([...history, {prompt, res}])
-    }
 
     // Create a callback function for onChange
     const onChange = React.useCallback((value, viewUpdate) => {
@@ -27,7 +23,7 @@ const Chat = (props) => {
         axios.post('http://localhost:8080/chat', { prompt })
         .then((res) => {
             setResponse(res.data);
-            addToHistory(res.data) // Adds prompt and response to session history
+            setHistory([...history, {prompt, res}]) // Adds prompt and response to session history
         })
         .catch((err) => {
             console.log(err)
@@ -36,24 +32,9 @@ const Chat = (props) => {
     }
 
     return (
-        <div className='grid grid-cols-7 w-full bg-slate-800'>
-            <div className='col-span-1 flex flex-col text-white overflow-auto bg-slate-900'>
-                <div className='flex flex-row justify-between'>
-                    <h6 className='font-bold my-2 bg-slate-700 p-1'>History</h6>
-                    {/* <AiOutlineMenu size={20}/> */}
-                </div>
-                {
-                    history?.map((item) => (
-                        <div className='overflow-hidden' onClick={() => {setPrompt(item.prompt); setResponse(item.res)}}>
-                            <div className='grid grid-cols-6 gap-2 overflow-hidden my-1 items-center justify-between hover:bg-slate-800 p-3 m-1 rounded-xl'>
-                                <BsFillChatLeftFill className='col-span-1' size={20}/>
-                                <p className='col-span-5'>{item.prompt.slice(0,27)}</p>
-                            </div>
-                        </div>
-                    ))
-                }
-            </div>
-            <div className='text-white grid md:grid-cols-2 sm:grid-cols-1 h-screen my-8 mx-auto gap-16 col-span-6'>
+        <div className={`w-full bg-slate-800 grid grid-cols-8`}>
+            <Menu menuActive={menuActive} setMenuActive={setMenuActive} history = {history} setPrompt={setPrompt} prompt={prompt} setResponse={setResponse} response={response}/>
+            <div className={`text-white grid md:grid-cols-2 sm:grid-cols-1 h-screen my-8 mx-auto gap-8 ${menuActive? 'col-start-2 col-end-9':'col-start-1 col-end-9'}`}>
                 <div className='md:w-[650px] md:h-[750px] sm:w-[400px] sm:h-[500px] my-5'>
                     <CodeMirror 
                     className='border'

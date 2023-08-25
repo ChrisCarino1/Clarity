@@ -6,7 +6,7 @@ const { Configuration, OpenAIApi } = require("openai");
 
 // Set up OpenAI configuration with API key
 const config = new Configuration({
-    apiKey: "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"
+    apiKey: "apikey"
 })
 
 // Initialize OpenAI API with the provided configuration
