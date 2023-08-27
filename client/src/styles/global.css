@@ -12,3 +12,45 @@
         @apply text-white bg-blue-600
     }
 }
+
+@layer components {
+    .history-item {
+        @apply relative flex items-center justify-center
+        h-12 w-full mb-2  shadow-lg
+        bg-gray-800 text-white
+        hover:bg-blue-400
+        rounded-3xl hover:rounded-xl
+        transition-all duration-300 ease-linear
+    }
+
+    .item-tooltip {
+        @apply absolute w-auto p-2 m-2 min-w-max z-10 left-[150px]
+        rounded-md shadow-md
+    text-white bg-blue-600
+        text-xs font-bold
+        transition-all duration-100 scale-0 origin-left
+    }
+
+    .sidebar-hr {
+        @apply bg-gray-700 dark:bg-gray-800 
+        border border-gray-700 dark:border-gray-800 rounded-full
+        mx-2;
+    }
+
+    ::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: #2f3136;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: #36393f;
+        border-radius: 5px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: #36393f;
+    }
+}
